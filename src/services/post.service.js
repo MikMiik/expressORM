@@ -1,4 +1,4 @@
-const Post = require("@/models/posts.model");
+const { Post } = require("@/models");
 class PostsService {
   async getAll() {
     const posts = await Post.findAll({ limit: 5 });

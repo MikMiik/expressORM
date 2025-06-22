@@ -1,4 +1,6 @@
 const fs = require("fs");
+require("module-alias/register");
+require("dotenv").config();
 
 module.exports = {
   development: {

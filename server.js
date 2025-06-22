@@ -5,7 +5,7 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const port = 3000;
-const sequelize = require("@/configs/database");
+const { sequelize } = require("@/models");
 
 // RouterImport
 const router = require("@/routes/api/index");
