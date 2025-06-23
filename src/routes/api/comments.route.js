@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const commentsValidator = require("../../validators/comments.validator.js");
-const commentsController = require("@/controllers/api/comments.controller.js");
+const commentsController = require("@/controllers/api/comment.controller.js");
 const attachResourceLoaders = require("@/utils/attachResourceLoaders.js");
 
 attachResourceLoaders(router, ["comment"]);

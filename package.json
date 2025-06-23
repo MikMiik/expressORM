@@ -13,7 +13,11 @@
     "sequelize": "^6.37.7"
   },
   "scripts": {
-    "start": "node --watch server.js"
+    "start": "node --watch server.js",
+    "migration:create": "sequelize-cli migration:create",
+    "db:migrate": "sequelize-cli db:migrate",
+    "db:migrate:undo": "sequelize-cli db:migrate:undo",
+    "db:migrate:undo:all": "sequelize-cli db:migrate:undo:all"
   },
   "_moduleAliases": {
     "@": "src"

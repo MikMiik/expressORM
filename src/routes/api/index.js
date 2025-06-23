@@ -5,12 +5,12 @@ const router = express.Router();
 // const categoriresRouter = require("./categories.route");
 const postsRouter = require("./posts.route");
 // const commentsRouter = require("./comments.route");
-// const usersRouter = require("./users.route");
+const usersRouter = require("./users.route");
 
 // router.use("/products", productsRouter);
 // router.use("/categories", categoriresRouter);
 router.use("/posts", postsRouter);
 // router.use("/comments", commentsRouter);
-// router.use("/users", usersRouter);
+router.use("/users", usersRouter);
 
 module.exports = router;
