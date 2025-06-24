@@ -6,7 +6,12 @@ class PostsService {
   }
 
   async getById(id) {
-    const post = await Post.findByPk(id, { include: User });
+    const post = await Post.findByPk(id, {
+      include: {
+        model: User,
+        as: "user",
+      },
+    });
     return post;
   }
 
