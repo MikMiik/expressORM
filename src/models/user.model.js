@@ -46,5 +46,10 @@ module.exports = (sequelize) => {
       timestamps: true,
     }
   );
+
+  User.associate = (db) => {
+    User.hasMany(db.Post);
+  };
+
   return User;
 };

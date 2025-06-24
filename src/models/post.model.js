@@ -21,11 +21,19 @@ module.exports = (sequelize, DataTypes) => {
       postImg: {
         type: DataTypes.STRING,
       },
+      publishedAt: {
+        type: DataTypes.DATE,
+      },
     },
     {
       tableName: "posts",
       timestamps: true,
     }
   );
+
+  Post.associate = (db) => {
+    Post.belongsTo(db.User);
+  };
+
   return Post;
 };

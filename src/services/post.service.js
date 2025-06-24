@@ -1,4 +1,4 @@
-const { Post } = require("@/models");
+const { Post, User } = require("@/models");
 class PostsService {
   async getAll() {
     const posts = await Post.findAll({ limit: 5 });
@@ -6,7 +6,7 @@ class PostsService {
   }
 
   async getById(id) {
-    const post = await Post.findByPk(id);
+    const post = await Post.findByPk(id, { include: User });
     return post;
   }
 
