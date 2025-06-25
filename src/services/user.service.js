@@ -1,7 +1,7 @@
 const { User } = require("@/models");
 class UsersService {
   async getAll() {
-    const users = await User.findAll({ limit: 5 });
+    const users = await User.findAll();
     return users;
   }
 
@@ -17,7 +17,6 @@ class UsersService {
 
   async update(id, data) {
     const user = await User.update(data, { where: { id } });
-    console.log(user);
     return user;
   }
 

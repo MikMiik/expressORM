@@ -1,10 +1,10 @@
-const commentsService = require("@/services/comments.service");
+const commentsService = require("@/services/comment.service");
 const throw404 = require("@/utils/throw404");
 
 exports.getList = async (req, res) => {
-  const result = await commentsService.getAll(req.page, req.limit);
+  const result = await commentsService.getAll();
   if (!result) throw404();
-  res.paginate(result);
+  res.success(200, result);
 };
 
 exports.getOne = async (req, res) => {

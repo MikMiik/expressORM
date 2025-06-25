@@ -1,16 +1,13 @@
-const { Post, User } = require("@/models");
+const { Post, User, Comment } = require("@/models");
 class PostsService {
   async getAll() {
-    const posts = await Post.findAll({ limit: 5 });
+    const posts = await Post.findAll();
     return posts;
   }
 
   async getById(id) {
     const post = await Post.findByPk(id, {
-      include: {
-        model: User,
-        as: "user",
-      },
+      include: [{ model: User }, { model: Comment }],
     });
     return post;
   }
