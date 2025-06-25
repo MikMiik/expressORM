@@ -1,8 +1,13 @@
-const { DataTypes } = require("sequelize");
-
-module.exports = (sequelize) => {
-  const User = sequelize.define(
-    "User",
+"use strict";
+const { Model } = require("sequelize");
+module.exports = (sequelize, DataTypes) => {
+  class User extends Model {
+    static associate(models) {
+      User.hasMany(models.Post);
+      User.hasMany(models.RefreshToken);
+    }
+  }
+  User.init(
     {
       name: DataTypes.STRING,
 
@@ -42,14 +47,11 @@ module.exports = (sequelize) => {
       deletedAt: DataTypes.DATE,
     },
     {
+      sequelize,
+      modelName: "User",
       tableName: "users",
       timestamps: true,
     }
   );
-
-  User.associate = (db) => {
-    User.hasMany(db.Post);
-  };
-
   return User;
 };

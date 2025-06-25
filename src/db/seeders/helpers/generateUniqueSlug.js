@@ -1,7 +1,6 @@
 const slugify = require("slugify");
 
 function generateUniqueSlug(name, existingSet) {
-  console.log(name);
   let base = slugify(name, { lower: true, strict: true });
   let slug = base;
   let i = 1;

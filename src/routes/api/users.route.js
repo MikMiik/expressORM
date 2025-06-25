@@ -5,7 +5,7 @@ const usersController = require("@/controllers/api/user.controller");
 const attachResourceLoaders = require("@/utils/attachResourceLoaders");
 
 attachResourceLoaders(router, ["user"]);
-// Posts
+// Users
 router.get("/", usersController.getList);
 router.get("/:user", usersController.getOne);
 // router.user("/", usersController.create);
