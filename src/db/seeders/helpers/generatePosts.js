@@ -48,6 +48,12 @@ async function generatePosts(count = 100, options = {}) {
       userId: faker.helpers.arrayElement(options.userIds),
       title,
       slug: generateUniqueSlug(title, slugs),
+      topic: faker.helpers.arrayElements([
+        "Company",
+        "Product",
+        "Design",
+        "Engineering",
+      ]),
       description: faker.lorem.sentence(2),
       content: faker.lorem.paragraphs(3),
       postImg: faker.helpers.arrayElement(postImages),

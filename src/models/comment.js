@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "parentId",
         as: "replies",
       });
-      Comment.belongsTo(models.User, { foreignKey: "userId" });
+      Comment.belongsTo(models.User, { as: "commenter", foreignKey: "userId" });
     }
   }
   Comment.init(
@@ -32,6 +32,11 @@ module.exports = (sequelize, DataTypes) => {
       modelName: "Comment",
       tableName: "comments",
       timestamps: true,
+      defaultScope: {
+        attributes: {
+          exclude: ["UserId", "PostId"],
+        },
+      },
     }
   );
   return Comment;

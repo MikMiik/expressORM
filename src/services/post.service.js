@@ -1,13 +1,53 @@
 const { Post, User, Comment } = require("@/models");
+const { Op } = require("sequelize");
 class PostsService {
-  async getAll() {
-    const posts = await Post.findAll();
-    return posts;
+  async getAll(page = 1, limit = 10) {
+    const offset = (page - 1) * limit;
+
+    const { count, rows } = await Post.findAndCountAll({
+      limit,
+      offset,
+      order: [["createdAt", "DESC"]],
+      include: {
+        model: User,
+        as: "author",
+        attributes: ["id", "name", "email", "username"],
+      },
+    });
+    return {
+      data: rows,
+      pagination: {
+        totalItems: count,
+        totalPages: Math.ceil(count / limit),
+        currentPage: page,
+        pageSize: limit,
+      },
+    };
   }
 
-  async getById(id) {
-    const post = await Post.findByPk(id, {
-      include: [{ model: User }, { model: Comment }],
+  async getById(idOrSlug) {
+    const post = await Post.findOne({
+      where: {
+        [Op.or]: [{ id: idOrSlug }, { slug: idOrSlug }],
+      },
+      include: [
+        {
+          model: User,
+          as: "author",
+          attributes: ["id", "name", "email", "username"],
+        },
+        {
+          model: Comment,
+          include: [
+            {
+              model: User,
+              as: "commenter",
+              attributes: ["id", "name", "email", "username"],
+            },
+          ],
+          as: "comments",
+        },
+      ],
     });
     return post;
   }
@@ -17,10 +57,13 @@ class PostsService {
     return post;
   }
 
-  async update(id, data) {
-    const post = await Post.update(data, { where: { id } });
-    console.log(post);
-    return post;
+  async update(idOrSlug, data) {
+    const post = await Post.update(data, {
+      where: {
+        [Op.or]: [{ id: idOrSlug }],
+      },
+    });
+    return { postId: idOrSlug };
   }
 
   async remove(id) {

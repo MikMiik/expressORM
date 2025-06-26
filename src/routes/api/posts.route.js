@@ -7,14 +7,10 @@ const attachResourceLoaders = require("@/utils/attachResourceLoaders");
 attachResourceLoaders(router, ["post"]);
 // Posts
 router.get("/", postsController.getList);
-router.get("/:post", postsController.getOne);
-router.post("/", postsController.create);
 router.put("/:post", postsController.update);
 router.patch("/:post", postsController.update);
+router.post("/", postsController.create);
 router.delete("/:post", postsController.remove);
-
-// Posts comments
-// router.get("/:post/comments", postsController.getPostComments);
-// router.post("/:post/comments", postsController.createPostComments);
+router.get("/:post", postsController.getOne);
 
 module.exports = router;

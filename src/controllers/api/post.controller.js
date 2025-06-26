@@ -2,7 +2,11 @@ const postService = require("@/services/post.service");
 const throw404 = require("@/utils/throw404");
 
 exports.getList = async (req, res) => {
-  const result = await postService.getAll();
+  const page = +req.query.page > 0 ? +req.query.page : 1;
+  let limit = +req.query.limit > 0 ? +req.query.limit : 10;
+  let maxLimit = 20;
+  if (limit > maxLimit) limit = maxLimit;
+  const result = await postService.getAll(page, limit);
   if (!result) throw404();
   res.success(200, result);
 };

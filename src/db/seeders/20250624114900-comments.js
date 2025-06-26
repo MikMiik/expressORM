@@ -22,7 +22,7 @@ module.exports = {
     // RAW	Không xử lý gì, trả về mảng 2 phần tử: [results, metadata]
     try {
       console.log("Đang tạo dữ liệu comments...");
-      const comments = await generateComments(100, { userIds, postIds });
+      const comments = await generateComments(1000, { userIds, postIds });
       console.log("Đã tạo xong dữ liệu comments!");
       await queryInterface.bulkInsert("comments", comments, {});
       console.log("Đã thêm dữ liệu comments vào bảng");
